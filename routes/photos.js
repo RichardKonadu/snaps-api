@@ -12,6 +12,15 @@ router.get("/", (req, res) => {
 
 // get comments
 
+router.get("/:id", (req, res) => {
+  const photosJson = JSON.parse(fs.readFileSync("./data/photos.json"));
+  const selectedPhoto = photosJson.find(
+    (photosJson) => photosJson.id === req.params.id
+  );
+  res.status(200).json(selectedPhoto);
+  console.log(selectedPhoto);
+});
+
 router.get("/:id/comments", (req, res) => {
   // step 1 read the file
   const photosJson = JSON.parse(fs.readFileSync("./data/photos.json"));
